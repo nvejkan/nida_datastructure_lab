@@ -28,7 +28,7 @@ def rect_area(w, h):
     return w*h
 
 def high_pass_filter(in_list,cutoff):
-    out_list = [ i if i<cutoff else 0 for i in in_list ]
+    out_list = [ i if i>=cutoff else 0 for i in in_list ]
     return out_list
 
 def count(in_list):
@@ -103,8 +103,8 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(rect_area(10.5, 2), 21)
         
     def test_high_pass_filter(self):
-        self.assertEqual(high_pass_filter([1,2,3,4,5,6,8,88,100,0,-9,55,10],20), [1, 2, 3, 4, 5, 6, 8, 0, 0, 0, -9, 0, 10])
-        self.assertEqual(high_pass_filter([1,2,3],1), [0,0,0])
+        self.assertEqual(high_pass_filter([1,2,3,4,5,6,8,88,100,0,-9,55,10],20), [0, 0, 0, 0, 0, 0, 0, 88, 100, 0, 0, 55, 0])
+        self.assertEqual(high_pass_filter([1,2,3],2), [0,2,3])
 
     def test_mean(self):
         import numpy as np
